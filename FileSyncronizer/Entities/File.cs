@@ -9,8 +9,9 @@ namespace FileSyncronizer.Entities
 {
     public class File
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string FileName { get; set; }
         public byte[] Stream { get; set; }

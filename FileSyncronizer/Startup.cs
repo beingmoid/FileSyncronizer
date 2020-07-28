@@ -31,7 +31,7 @@ namespace FileSyncronizer
 
             services.AddDbContext<FileContext>(options => {
 
-                options.UseSqlServer("Server=62.210.189.233;Initial Catalog=FileSyncronizer;Integrated Security=False;Trusted_Connection=False;User ID=moid;Password=inspectionAdmin@123");
+            options.UseSqlServer("Server=62.210.189.233;Initial Catalog=FileSyncronizer;Integrated Security=False;Trusted_Connection=False;User ID=moid;Password=inspectionAdmin@123");
                      }
         );
 

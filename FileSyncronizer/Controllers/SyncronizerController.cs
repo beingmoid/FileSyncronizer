@@ -58,6 +58,7 @@ namespace FileSyncronizer.Controllers
         public IActionResult SearchFile(string FileName)
         {
             var Search =  db.File.Where(x => x.FileName.Contains(FileName)).Select(x=> new { 
+            Id= x.Id,
             FileName = x.FileName,
             Extention = x.Extention
             });
@@ -67,9 +68,94 @@ namespace FileSyncronizer.Controllers
         [HttpGet("FileDownload")]
         public async Task<FileStreamResult> DownloadFile (int Id, string Key)
         {
-            
+            var files = (await db.File.SingleOrDefaultAsync(x => x.Id == Id));
             var fileName = ((await db.File.SingleOrDefaultAsync(x => x.Id == Id)).FileName);
-            var mimeType = "application/....";
+            var mimeType = "";
+            if (files.Extention== ".abw")
+            {
+                mimeType = "application/x-abiword";
+            }
+            else if (files.Extention == ".arc")
+            {
+                mimeType = "application/x-freearc";
+            }
+            else if (files.Extention == ".bin")
+            {
+                mimeType = "application/octet-stream";
+            }
+            else if (files.Extention == ".bmp")
+            {
+                mimeType = "image/bmp";
+            }
+            else if (files.Extention == ".bz")
+            {
+                mimeType = "application/x-bzip";
+            }
+            else if (files.Extention == ".bz2")
+            {
+                mimeType = "application/x-bzip2";
+            }
+            else if (files.Extention == ".csh")
+            {
+                mimeType = "application/x-csh";
+            }
+            else if (files.Extention == ".css")
+            {
+                mimeType = "text/css";
+            }
+            else if (files.Extention == ".csv")
+            {
+                mimeType = "text/csv";
+            }
+            else if (files.Extention == ".doc")
+            {
+                mimeType = "application/msword";
+            }
+            else if (files.Extention == ".docx")
+            {
+                mimeType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            }
+            else if (files.Extention == ".eot")
+            {
+                mimeType = "application/vnd.ms-fontobject";
+            }
+            else if (files.Extention == ".epub")
+            {
+                mimeType = "application/epub+zip";
+            }
+            else if (files.Extention == ".gz")
+            {
+                mimeType = "application/gzip";
+            }
+            else if (files.Extention == ".gif")
+            {
+                mimeType = "image/gif";
+            }
+            else if (files.Extention == ".html")
+            {
+                mimeType = "text/html";
+            }
+            else if (files.Extention == ".ico")
+            {
+                mimeType = "image/vnd.microsoft.icon";
+            }
+            else if (files.Extention == ".mp3")
+            {
+                mimeType = "audio/mpeg";
+            }
+            else if (files.Extention == ".php")
+            {
+                mimeType = "application/x-httpd-php";
+            }
+            else if (files.Extention == ".ppt")
+            {
+                mimeType = "application/vnd.ms-powerpoint";
+            }
+            else if (files.Extention == ".pptx")
+            {
+                mimeType = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+            }
+
             var file = (await db.File.SingleOrDefaultAsync(x => x.Id == Id)).Stream;
             Stream stream =  new MemoryStream(file);
 
